@@ -1,0 +1,28 @@
+# AGV Configuration File
+
+# Physical Parameters
+line_width: 0.020          # 20mm
+marker_diameter: 0.050     # 50mm
+sensor_spacing: 0.030      # 30mm
+
+# Control Parameters
+base_speed: 0.25           # m/s
+control_rate: 50           # Hz
+
+# PID Gains (tuned for 20mm line)
+kp: 15.0
+ki: 0.02
+kd: 2.0
+
+# Detection Thresholds
+obstacle_threshold: 0.20   # 20cm
+obstacle_critical: 0.10    # 10cm
+
+# Timing Parameters
+marker_confirm_duration: 0.3    # seconds
+unload_duration: 3.0            # seconds
+destination_stop_time: 1.0      # seconds
+mission_complete_wait: 2.0      # seconds
+
+# Mission Control
+auto_restart: false        # Auto restart after mission complete

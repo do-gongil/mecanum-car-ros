@@ -1,0 +1,474 @@
+<?xml version="1.0"?>
+<robot name="agv_mecanum">
+  
+  <!-- Base Link 185mm x 147.5mm x 0.05mm -->
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.185 0.1475 0.05"/>
+      </geometry>
+      <material name="blue">
+        <color rgba="0 0 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.185 0.1475 0.05"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="2.0"/>
+      <inertia ixx="0.003" ixy="0.0" ixz="0.0" 
+               iyy="0.006" iyz="0.0" izz="0.008"/>
+    </inertial>
+  </link>
+
+  <!-- Mecanum Wheels (4 wheel) -->
+  <!-- Front Left Wheel -->
+  <link name="front_left_wheel">
+    <visual>
+      <geometry>
+        <cylinder radius="0.03" length="0.03"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <material name="black">
+        <color rgba="0.1 0.1 0.1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="0.03" length="0.03"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+    </collision>
+    <inertial>
+      <mass value="0.2"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" 
+               iyy="0.0001" iyz="0.0" izz="0.0001"/>
+    </inertial>
+  </link>
+
+  <joint name="front_left_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="front_left_wheel"/>
+    <origin xyz="0.0625 0.08875 -0.01" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+  <!-- Front Right Wheel -->
+  <link name="front_right_wheel">
+    <visual>
+      <geometry>
+        <cylinder radius="0.03" length="0.03"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <material name="black">
+        <color rgba="0.1 0.1 0.1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="0.03" length="0.03"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+    </collision>
+    <inertial>
+      <mass value="0.2"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" 
+               iyy="0.0001" iyz="0.0" izz="0.0001"/>
+    </inertial>
+  </link>
+
+  <joint name="front_right_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="front_right_wheel"/>
+    <origin xyz="0.0625 -0.08875 -0.01" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+  <!-- Rear Left Wheel -->
+  <link name="rear_left_wheel">
+    <visual>
+      <geometry>
+        <cylinder radius="0.03" length="0.03"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <material name="black">
+        <color rgba="0.1 0.1 0.1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="0.03" length="0.03"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+    </collision>
+    <inertial>
+      <mass value="0.2"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" 
+               iyy="0.0001" iyz="0.0" izz="0.0001"/>
+    </inertial>
+  </link>
+
+  <joint name="rear_left_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="rear_left_wheel"/>
+    <origin xyz="-0.0625 0.08875 -0.01" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+  <!-- Rear Right Wheel -->
+  <link name="rear_right_wheel">
+    <visual>
+      <geometry>
+        <cylinder radius="0.03" length="0.03"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <material name="black">
+        <color rgba="0.1 0.1 0.1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="0.03" length="0.03"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+    </collision>
+    <inertial>
+      <mass value="0.2"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" 
+               iyy="0.0001" iyz="0.0" izz="0.0001"/>
+    </inertial>
+  </link>
+
+  <joint name="rear_right_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="rear_right_wheel"/>
+    <origin xyz="-0.0625 -0.08875 -0.01" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+  <!-- IR Sensors (4개, 앞 뒤 2개 간격) -->
+  <!-- left_front-->
+  <link name="ir_sensor_L_front">
+    <visual>
+      <geometry>
+        <box size="0.005 0.005 0.005"/>
+      </geometry>
+      <material name="red">
+        <color rgba="1 0 0 1"/>
+      </material>
+    </visual>
+    <inertial>
+      <mass value="0.01"/>
+      <inertia ixx="0.00001" ixy="0.0" ixz="0.0" 
+               iyy="0.00001" iyz="0.0" izz="0.00001"/>
+    </inertial>
+  </link>
+
+  <joint name="ir_sensor_L_front_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="ir_sensor_L_front"/>
+    <origin xyz="0.06 0.0075 -0.03" rpy="0 1.5708 0"/>
+  </joint>
+
+  <!-- left rear-->
+  <link name="ir_sensor_L_rear">
+    <visual>
+      <geometry>
+        <box size="0.005 0.005 0.005"/>
+      </geometry>
+      <material name="red">
+        <color rgba="1 0 0 1"/>
+      </material>
+    </visual>
+    <inertial>
+      <mass value="0.01"/>
+      <inertia ixx="0.00001" ixy="0.0" ixz="0.0" 
+               iyy="0.00001" iyz="0.0" izz="0.00001"/>
+    </inertial>
+  </link>
+
+  <joint name="ir_sensor_L_rear_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="ir_sensor_L_rear"/>
+    <origin xyz="-0.06 0.06 -0.03" rpy="0 1.5708 0"/>
+  </joint>
+
+  <!-- right front-->
+  <link name="ir_sensor_R_front">
+    <visual>
+      <geometry>
+        <box size="0.005 0.005 0.005"/>
+      </geometry>
+      <material name="red">
+        <color rgba="1 0 0 1"/>
+      </material>
+    </visual>
+    <inertial>
+      <mass value="0.01"/>
+      <inertia ixx="0.00001" ixy="0.0" ixz="0.0" 
+               iyy="0.00001" iyz="0.0" izz="0.00001"/>
+    </inertial>
+  </link>
+
+  <joint name="ir_sensor_R_front_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="ir_sensor_R_front"/>
+    <origin xyz="0.06 -0.0075 -0.03" rpy="0 1.5708 0"/>
+  </joint>
+  
+  <!-- right front-->
+  <link name="ir_sensor_R_rear">
+    <visual>
+      <geometry>
+        <box size="0.005 0.005 0.005"/>
+      </geometry>
+      <material name="red">
+        <color rgba="1 0 0 1"/>
+      </material>
+    </visual>
+    <inertial>
+      <mass value="0.01"/>
+      <inertia ixx="0.00001" ixy="0.0" ixz="0.0" 
+               iyy="0.00001" iyz="0.0" izz="0.00001"/>
+    </inertial>
+  </link>
+
+  <joint name="ir_sensor_R_rear_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="ir_sensor_R_rear"/>
+    <origin xyz="-0.06 -0.06 -0.03" rpy="0 1.5708 0"/>
+  </joint>
+
+  <!-- Ultrasonic Sensors (앞/뒤) -->
+  <link name="ultrasonic_front">
+    <visual>
+      <geometry>
+        <box size="0.02 0.03 0.015"/>
+      </geometry>
+      <material name="yellow">
+        <color rgba="1 1 0 1"/>
+      </material>
+    </visual>
+    <inertial>
+      <mass value="0.01"/>
+      <inertia ixx="0.00001" ixy="0.0" ixz="0.0" 
+               iyy="0.00001" iyz="0.0" izz="0.00001"/>
+    </inertial>
+  </link>
+
+  <joint name="ultrasonic_front_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="ultrasonic_front"/>
+    <origin xyz="0.1025 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <link name="ultrasonic_rear">
+    <visual>
+      <geometry>
+        <box size="0.02 0.03 0.015"/>
+      </geometry>
+      <material name="yellow">
+        <color rgba="1 1 0 1"/>
+      </material>
+    </visual>
+    <inertial>
+      <mass value="0.01"/>
+      <inertia ixx="0.00001" ixy="0.0" ixz="0.0" 
+               iyy="0.00001" iyz="0.0" izz="0.00001"/>
+    </inertial>
+  </link>
+
+  <joint name="ultrasonic_rear_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="ultrasonic_rear"/>
+    <origin xyz="-0.1025 0 0" rpy="0 0 3.14159"/>
+  </joint>
+
+  <!-- Gazebo Plugins -->
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_planar_move.so">
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryTopic>odom</odometryTopic>
+      <odometryFrame>odom</odometryFrame>
+      <odometryRate>20.0</odometryRate>
+      <robotBaseFrame>base_link</robotBaseFrame>
+    </plugin>
+  </gazebo>
+
+  <!-- IR Sensor Plugin - Left front -->
+  <gazebo reference="ir_sensor_L_front">
+    <sensor type="camera" name="ir_camera_L_front">
+      <update_rate>30.0</update_rate>
+      <camera name="ir_L_front">
+        <horizontal_fov>0.3</horizontal_fov>
+        <image>
+          <width>64</width>
+          <height>64</height>
+          <format>L8</format>
+        </image>
+        <clip>
+          <near>0.002</near>  <!-- detect 2mm ~ 100mm-->
+          <far>0.1</far>
+        </clip>
+      </camera>
+      <plugin name="camera_controller_L_front" filename="libgazebo_ros_camera.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>30.0</updateRate>
+        <cameraName>ir_sensor/L_front</cameraName>
+        <imageTopicName>image_raw</imageTopicName>
+        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+        <frameName>ir_sensor_L_front</frameName>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+  <!-- IR Sensor Plugin - Left rear -->
+  <gazebo reference="ir_sensor_L_rear">
+    <sensor type="camera" name="ir_camera_L_rear">
+      <update_rate>30.0</update_rate>
+      <camera name="ir_L_rear">
+        <horizontal_fov>0.3</horizontal_fov>
+        <image>
+          <width>64</width>
+          <height>64</height>
+          <format>L8</format>
+        </image>
+        <clip>
+          <near>0.002</near>  <!-- detect 2mm ~ 100mm-->
+          <far>0.1</far>
+        </clip>
+      </camera>
+      <plugin name="camera_controller_L_rear" filename="libgazebo_ros_camera.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>30.0</updateRate>
+        <cameraName>ir_sensor/L_rear</cameraName>
+        <imageTopicName>image_raw</imageTopicName>
+        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+        <frameName>ir_sensor_L_rear</frameName>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+  <!-- IR Sensor Plugin - Right front -->
+  <gazebo reference="ir_sensor_R_front">
+    <sensor type="camera" name="ir_camera_R_front">
+      <update_rate>30.0</update_rate>
+      <camera name="ir_R_front">
+        <horizontal_fov>0.3</horizontal_fov>
+        <image>
+          <width>64</width>
+          <height>64</height>
+          <format>L8</format>
+        </image>
+        <clip>
+          <near>0.002</near>
+          <far>0.1</far>
+        </clip>
+      </camera>
+      <plugin name="camera_controller_R_front" filename="libgazebo_ros_camera.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>30.0</updateRate>
+        <cameraName>ir_sensor/R_front</cameraName>
+        <imageTopicName>image_raw</imageTopicName>
+        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+        <frameName>ir_sensor_R_front</frameName>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+  <!-- IR Sensor Plugin - Right rear -->
+  <gazebo reference="ir_sensor_R_rear">
+    <sensor type="camera" name="ir_camera_R_rear">
+      <update_rate>30.0</update_rate>
+      <camera name="ir_R_rear">
+        <horizontal_fov>0.3</horizontal_fov>
+        <image>
+          <width>64</width>
+          <height>64</height>
+          <format>L8</format>
+        </image>
+        <clip>
+          <near>0.002</near>
+          <far>0.1</far>
+        </clip>
+      </camera>
+      <plugin name="camera_controller_R_rear" filename="libgazebo_ros_camera.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>30.0</updateRate>
+        <cameraName>ir_sensor/R_rear</cameraName>
+        <imageTopicName>image_raw</imageTopicName>
+        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+        <frameName>ir_sensor_R_rear</frameName>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+  <!-- Ultrasonic Sensor - Front -->
+  <gazebo reference="ultrasonic_front">
+    <sensor type="ray" name="ultrasonic_front_sensor">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>true</visualize>
+      <update_rate>10</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>5</samples>
+            <resolution>1</resolution>
+            <min_angle>-0.12</min_angle>
+            <max_angle>0.12</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.02</min>
+          <max>0.5</max>
+          <resolution>0.01</resolution>
+        </range>
+      </ray>
+      <plugin name="gazebo_ros_range_front" filename="libgazebo_ros_range.so">
+        <gaussianNoise>0.005</gaussianNoise>
+        <alwaysOn>true</alwaysOn>
+        <updateRate>10.0</updateRate>
+        <topicName>/ultrasonic/front</topicName>
+        <frameName>ultrasonic_front</frameName>
+        <radiation>ultrasound</radiation>
+        <fov>0.24</fov>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+  <!-- Ultrasonic Sensor - Rear -->
+  <gazebo reference="ultrasonic_rear">
+    <sensor type="ray" name="ultrasonic_rear_sensor">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>true</visualize>
+      <update_rate>10</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>5</samples>
+            <resolution>1</resolution>
+            <min_angle>-0.12</min_angle>
+            <max_angle>0.12</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.02</min>
+          <max>0.5</max>
+          <resolution>0.01</resolution>
+        </range>
+      </ray>
+      <plugin name="gazebo_ros_range_rear" filename="libgazebo_ros_range.so">
+        <gaussianNoise>0.005</gaussianNoise>
+        <alwaysOn>true</alwaysOn>
+        <updateRate>10.0</updateRate>
+        <topicName>/ultrasonic/rear</topicName>
+        <frameName>ultrasonic_rear</frameName>
+        <radiation>ultrasound</radiation>
+        <fov>0.24</fov>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+</robot>

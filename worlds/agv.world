@@ -1,0 +1,147 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+  <world name="agv_world">
+    <!-- init perspective setting-->
+    <gui fullscreen='0'>
+      <camera name='cam'>
+        <pose>-6.0 -6.0 6.0 0 0.65 0.785</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>    
+    </gui>
+    <include><uri>model://sun</uri></include>
+    <physics type="ode">
+      <real_time_update_rate>1000.0</real_time_update_rate>
+    </physics>
+
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision"><geometry><plane><normal>0 0 1</normal><size>100 100</size></plane></geometry></collision>
+        <visual name="visual"><geometry><plane><normal>0 0 1</normal><size>100 100</size></plane></geometry>
+          <material><ambient>0.8 0.8 0.8 1</ambient><diffuse>0.8 0.8 0.8 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+    
+    <!-- wall setting-->
+    <model name="walls">
+      <static>true</static>
+      <pose>0 0 0 0 0 0</pose>
+      <link name="wall_north">
+        <pose>0 3.0 0.2 0 0 0</pose>
+        <visual name="vis">
+          <geometry><box><size>6.2 0.2 0.4</size></box></geometry>
+          <material><ambient>0.3 0.3 0.3 1</ambient></material>
+        </visual>
+        <collision name="col">
+        <geometry><box><size>6.2 0.2 0.4</size></box></geometry>
+        </collision>
+      </link>
+      
+      <link name="wall_south">    <!-- roslaunch시, 바로 앞 왼쪽-->
+        <pose>0 -3.0 0.2 0 0 0</pose>
+        <visual name="vis">
+          <geometry><box><size>6.2 0.2 0.4</size></box></geometry>
+          <material><ambient>0.3 0.3 0.3 1</ambient></material>
+        </visual>
+        <collision name="col"><geometry><box><size>6.2 0.2 0.4</size></box></geometry></collision>
+      </link>
+      <link name="wall_east">     <!-- roslaunch시, 바로 앞 오른쪽-->
+        <pose>3.0 0 0.2 0 0 0</pose>
+        <visual name="vis"><geometry><box><size>0.2 6.0 0.4</size></box></geometry><material><ambient>0.3 0.3 0.3 1</ambient></material></visual>
+        <collision name="col"><geometry><box><size>0.2 6.0 0.4</size></box></geometry></collision>
+      </link>
+      <link name="wall_west">
+        <pose>-3.0 0 0.2 0 0 0</pose>
+        <visual name="vis"><geometry><box><size>0.2 6.0 0.4</size></box></geometry><material><ambient>0.3 0.3 0.3 1</ambient></material></visual>
+        <collision name="col"><geometry><box><size>0.2 6.0 0.4</size></box></geometry></collision>
+      </link>
+    </model>
+
+    <model name="line_start">
+      <static>true</static>
+      <pose>-2.0 -1.0 0.001 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><box><size>2.0 0.05 0.001</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/FlatBlack</name></script></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="line_end">
+      <static>true</static>
+      <pose>0.0 1.0 0.001 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><box><size>0.05 2.0 0.001</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/FlatBlack</name></script></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="line_corner">
+      <static>true</static>
+      <pose>-1 -1 0.001 0 0 0</pose>
+
+      <link name="seg_1">
+        <pose>0.112 0.006 0 0 0 0.112</pose>
+        <visual name="vis">
+          <geometry><box><size>0.254 0.05 0.001</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/FlatBlack</name></script></material>
+        </visual>
+      </link>
+
+      <link name="seg_2">
+        <pose>0.330 0.056 0 0 0 0.337</pose>
+        <visual name="vis">
+          <geometry><box><size>0.254 0.05 0.001</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/FlatBlack</name></script></material>
+        </visual>
+      </link>
+
+      <link name="seg_3">
+        <pose>0.532 0.153 0 0 0 0.561</pose>
+        <visual name="vis">
+          <geometry><box><size>0.254 0.05 0.001</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/FlatBlack</name></script></material>
+        </visual>
+      </link>
+
+      <link name="seg_4">
+        <pose>0.707 0.293 0 0 0 0.785</pose>
+        <visual name="vis">
+          <geometry><box><size>0.254 0.05 0.001</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/FlatBlack</name></script></material>
+        </visual>
+      </link>
+
+      <link name="seg_5">
+        <pose>0.847 0.468 0 0 0 1.010</pose>
+        <visual name="vis">
+          <geometry><box><size>0.254 0.05 0.001</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/FlatBlack</name></script></material>
+        </visual>
+      </link>
+
+      <link name="seg_6">
+        <pose>0.944 0.670 0 0 0 1.234</pose>
+        <visual name="vis">
+          <geometry><box><size>0.254 0.05 0.001</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/FlatBlack</name></script></material>
+        </visual>
+      </link>
+
+      <link name="seg_7">
+        <pose>0.989 0.888 0 0 0 1.459</pose>
+        <visual name="vis">
+          <geometry><box><size>0.254 0.05 0.001</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/FlatBlack</name></script></material>
+        </visual>
+      </link>
+
+    </model>
+
+  </world>
+</sdf>

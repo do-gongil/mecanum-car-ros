@@ -1,0 +1,21 @@
+# catkin
+build/
+devel/
+logs/
+.catkin_workspace
+*.pyc
+__pycache__/
+
+# ROS / Gazebo
+*.bag
+.gazebo/
+
+# editors
+.vscode/
+.idea/
+*.swp
+
+# OS
+Thumbs.db
+desktop.ini
+.DS_Store
