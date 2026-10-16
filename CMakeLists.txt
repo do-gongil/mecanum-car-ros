@@ -46,3 +46,8 @@ install(DIRECTORY launch/
 install(DIRECTORY urdf/
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/urdf
 )
+
+# World file install
+install(DIRECTORY worlds/
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/worlds
+)
