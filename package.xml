@@ -3,7 +3,7 @@
   <name>mecanum_car</name>
   <version>1.0.0</version>
   <description>Mecanum wheel car for Gazebo simulation</description>
-  <maintainer email="your@email.com">Your Name</maintainer>
+  <maintainer email="dohyun@kangwon.ac.kr">LEE Dohyun</maintainer>
   <license>MIT</license>
 
   <buildtool_depend>catkin</buildtool_depend>

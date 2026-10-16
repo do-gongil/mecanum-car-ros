@@ -46,7 +46,7 @@ IR 센서는 Gazebo 카메라 플러그인으로 흑백 이미지를 내보내�
 
 ```bash
 cd ~/catkin_ws/src
-git clone <this-repo> mecanum_car
+git clone https://github.com/do-gongil/mecanum-car-ros.git mecanum_car
 cd ~/catkin_ws && catkin_make
 source devel/setup.bash
 
@@ -67,10 +67,5 @@ rosrun mecanum_car mecanum_controller.py  # w/s/a/d/q/e/z/c/x 단발 명령
 
 ## 알려진 이슈
 
-- `CMakeLists.txt` 의 `install(DIRECTORY meshes/ ...)` 가 존재하지 않는 `meshes/` 를 참조한다.
-  `catkin_make` 빌드는 통과하지만 `catkin_make install` 은 실패한다.
-- `catkin_install_python` 에 `line_tracer.py` 와 `obstacle_detector.py` 가 빠져 있다.
-  launch 파일은 소스 트리에서 직접 실행하므로 동작에는 지장이 없다.
 - `config/line_follower_params.yaml` 의 PID 게인(`kp=15.0` 등)은 현재 어느 노드에서도 로드하지 않는다.
   `line_tracer.py` 는 게인을 코드에 하드코딩하고 있다.
-- `package.xml` 의 maintainer가 템플릿 기본값(`Your Name`)으로 남아 있다.

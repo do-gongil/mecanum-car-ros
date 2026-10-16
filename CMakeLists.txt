@@ -32,6 +32,8 @@ include_directories(
 catkin_install_python(PROGRAMS
   scripts/mecanum_controller.py
   scripts/mecanum_teleop.py
+  scripts/line_tracer.py
+  scripts/obstacle_detector.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
@@ -43,9 +45,4 @@ install(DIRECTORY launch/
 # URDF file install
 install(DIRECTORY urdf/
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/urdf
-)
-
-# Mesh file install
-install(DIRECTORY meshes/
-  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/meshes
 )
